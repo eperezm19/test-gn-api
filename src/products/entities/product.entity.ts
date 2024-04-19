@@ -1,5 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Package } from './product-package.entity';
+import { ComboProduct } from 'src/combos/entities';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -20,4 +27,7 @@ export class Product {
 
   @ManyToOne(() => Package, (productPackage) => productPackage.products)
   package: Package;
+
+  @OneToMany(() => ComboProduct, (comboProduct) => comboProduct.product)
+  comboProducts: ComboProduct[];
 }
